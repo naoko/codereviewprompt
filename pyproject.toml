@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "codereviewprompt"
+version = "0.1.0"
+description = "A zero-hook CLI that turns your local git diff into a Gemini-ready code review prompt."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+  { name="Naoko Reeves", email="noreply@example.com" }
+]
+dependencies = [
+  "click>=8.0",
+  "PyYAML",
+  "requests",
+  "pyperclip",
+  "tree-sitter"
+]
+classifiers = [
+  "Programming Language :: Python :: 3.11",
+  "License :: OSI Approved :: MIT License"
+]
+
+[project.scripts]
+codereviewprompt = "codereviewprompt.cli:cli"
