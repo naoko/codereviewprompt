@@ -123,12 +123,27 @@ pip install -r requirements-dev.txt
 pytest -q
 ```
 
+## ⚙️ Makefile
+
+Use the provided Makefile for common tasks:
+
+* make requirements — compile `requirements.in` to `requirements.txt` (requires pip-tools).
+* make init         — create a `.venv` via `uv` and install both production and dev dependencies.
+
+Example:
+```bash
+make requirements
+make init
+```
+
 Linting & formatting: `ruff check .` & `ruff format .`
 
 ---
 
 ## ➕ Roadmap
 
+* Symbol-level context extraction (Python AST; Tree-sitter for other languages)
+* Rich prompt templates: include full diffs, severity guide, and file grouping
 * Inline diff annotations (map Gemini feedback back to line numbers)
 * VS Code & JetBrains plugin wrappers
 * Quality gates: exit non‑zero on detected **critical** issues (for CI use)
