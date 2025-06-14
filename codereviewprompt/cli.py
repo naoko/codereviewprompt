@@ -70,14 +70,15 @@ def run(base, ticket, context_lines, out, model):
     lines.append('## Diff')
     lines.append('')
     lines.append('```diff')
+    # Retrieve raw git diff; handle errors explicitly
+    import subprocess
     try:
-        import subprocess
         diff_text = subprocess.check_output(
             ['git', 'diff', f'--unified=0', base],
-            stderr=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
             text=True,
         )
-    except Exception:
+    except (subprocess.CalledProcessError, FileNotFoundError):
         diff_text = ''
     # Include raw diff lines
     for l in diff_text.rstrip().splitlines():
