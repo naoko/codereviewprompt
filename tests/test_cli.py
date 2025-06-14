@@ -8,9 +8,9 @@ def test_help_shows_run_command():
     assert result.exit_code == 0
     assert 'run' in result.output
 
-def test_run_stub_exits_with_1():
+def test_run_default_copies_clipboard():
     runner = CliRunner()
     result = runner.invoke(cli, ['run'])
-    # In a non-repo or with no changes, we expect a graceful no-op
+    # Default behavior in a repo: copy prompt to clipboard
     assert result.exit_code == 0
-    assert 'No changes detected' in result.output
+    assert 'Prompt copied to clipboard.' in result.output

@@ -46,8 +46,16 @@ def test_run_outputs_context(tmp_path):
     assert result.exit_code == 0
     output = result.output
     # Should mention the file and context range 1-3
+    # Should include the rubric header
+    assert '## Review Rubric & Severity Guide' in output
+    assert '**Critical**' in output
+    # Should include diff section
+    assert '## Diff' in output
+    assert '```diff' in output
+    # Diff should show the inserted 'x'
+    assert '+x' in output
+    # Context snippets as before
     assert 'foo.txt:1-3' in output
-    # Snippet should include the inserted line 'x'
     assert 'a\nx\nb' in output
 
 def test_run_no_changes(tmp_path):

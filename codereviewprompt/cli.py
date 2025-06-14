@@ -50,25 +50,51 @@ def run(base, ticket, context_lines, out, model):
         click.echo("No context available for the detected changes.")
         return
 
-    # Step 3: compose prompt
-    lines = []
-    lines.append("# Code Review Prompt")
-    lines.append("")
+    # Step 3: compose prompt with rubric, diff, and context snippets
+    lines: list[str] = []
+    lines.append('# Code Review Prompt')
+    lines.append('')
+    # Rubric & severity guide
+    lines.append('## Review Rubric & Severity Guide')
+    lines.append('')
+    lines.append('**Critical**: security vulnerabilities, data loss, crashes.')
+    lines.append('**Major**: logic errors, performance regressions, incorrect functionality.')
+    lines.append('**Minor**: code readability, maintainability, edge cases.')
+    lines.append('**Style**: formatting, naming, comments.')
+    lines.append('')
+    # Optional ticket info
     if ticket:
-        lines.append(f"**Ticket**: {ticket}")
-        lines.append("")
-    lines.append("## Context Snippets")
-    lines.append("")
+        lines.append(f'**Ticket**: {ticket}')
+        lines.append('')
+    # Full diff
+    lines.append('## Diff')
+    lines.append('')
+    lines.append('```diff')
+    try:
+        import subprocess
+        diff_text = subprocess.check_output(
+            ['git', 'diff', f'--unified=0', base],
+            stderr=subprocess.DEVNULL,
+            text=True,
+        )
+    except Exception:
+        diff_text = ''
+    # Include raw diff lines
+    for l in diff_text.rstrip().splitlines():
+        lines.append(l)
+    lines.append('```')
+    lines.append('')
+    # Contextual snippets grouped by file
+    lines.append('## Context Snippets')
+    lines.append('')
     for ctx in contexts:
         header = f"### {ctx['file_path']}:{ctx['context_start']}-{ctx['context_end']}"
         lines.append(header)
         lines.append('```')
-        # strip trailing newline to avoid extra blank
         snippet = ctx['snippet'].rstrip('\n')
         lines.append(snippet)
         lines.append('```')
-        lines.append("")
-
+        lines.append('')
     prompt = '\n'.join(lines)
 
     # Step 4: output
