@@ -6,18 +6,26 @@
 
 ## Installation
 
-### Using `uv` (recommended)
+### Clone & bootstrap (recommended)
 
 ```bash
-uv pip install git+https://github.com/your-org/codereviewprompt.git
+git clone https://github.com/naoko/codereviewprompt.git
+cd codereviewprompt
+make requirements
+make init
 ```
 
-If you prefer an isolated environment, create one first:
+### Install via `uv` (alternate)
 
 ```bash
-uv venv .venv
-source .venv/bin/activate
-uv pip install git+https://github.com/your-org/codereviewprompt.git
+uv pip install git+https://github.com/naoko/codereviewprompt.git
+```
+
+### Manual install (fallback)
+
+```bash
+python -m venv .venv && source .venv/bin/activate
+pip install -e .
 ```
 
 ---
@@ -44,17 +52,13 @@ Python dependencies are pinned in `pyproject.toml` / `requirements.txt` and inst
 
 ## 🚀 Quick Start
 
+Follow the [Installation](#installation) instructions above to set up the tool.
+Then generate a code-review prompt:
+
 ```bash
-# 1 · Install
-python -m venv .venv && source .venv/bin/activate
-pip install -e .
-
-# 2 · Run on your feature branch
 codereviewprompt run --base main --ticket JIRA-1234 --out clipboard
-
-# 3 · Open Gemini 2.5 Pro in your browser
-# 4 · ⌘+V  (paste)  →  Enter  →  get feedback ✨
 ```
+Paste into Gemini 2.5 Pro and hit Enter to get feedback ✨
 
 By default, codereviewprompt:
 
