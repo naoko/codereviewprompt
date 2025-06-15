@@ -37,8 +37,13 @@ def main(args=None):
     # Verify that the Language.build_library API is available
     if not hasattr(Language, 'build_library'):
         print(
-            "Error: your installed tree-sitter binding does not support building language libraries."
-            " Please install 'tree-sitter>=0.20' in your active Python environment and rerun."
+            "Error: your installed tree-sitter binding does not support building language libraries.\n"
+            "This usually means the tree-sitter C library and headers were missing at install time.\n"
+            "On macOS, install via: brew install tree-sitter\n"
+            "On Debian/Ubuntu: sudo apt-get install libtree-sitter-dev\n"
+            "Then reinstall the Python binding from source:\n"
+            "  pip uninstall tree-sitter\n"
+            "  pip install --no-binary=:all: tree-sitter>=0.20\n"
         )
         sys.exit(1)
     # Prepare temporary directory for cloning grammar repos
