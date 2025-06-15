@@ -171,6 +171,10 @@ Linting & formatting: `ruff check .` & `ruff format .`
 3. Run `pre-commit install`
 4. Submit a PR – please include tests where reasonable!
 
+## 🤖 Acknowledgements
+
+This project’s code was generated with assistance from OpenAI’s ChatGPT via the Codex CLI tool.
+
 ---
 
 ## 📝 License
