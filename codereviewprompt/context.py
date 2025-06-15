@@ -1,5 +1,5 @@
 """
-Context extraction by symbol (using Python AST) with fallback to raw diff context.
+Context extraction by symbol (using Tree-sitter or Python AST) with fallback to raw diff context.
 """
 import os
 import ast
@@ -29,28 +29,47 @@ def extract_by_symbol(
     total_lines = len(lines)
     source = ''.join(lines).encode('utf8')
 
-    # Parse with Tree-sitter Python grammar
+    # Collect symbol ranges: try Tree-sitter first, then Python AST
+    symbol_ranges: list[tuple[int, int]] = []
     try:
         from tree_sitter import Parser
-        from tree_sitter_python import language as _get_python_language
+        from tree_sitter_languages import get_language
 
+        # Load Python language via tree-sitter-languages
+        PY_LANGUAGE = get_language('python')
         parser = Parser()
-        # Obtain the Python grammar for Tree-sitter
-        parser.language = _get_python_language()
+        parser.language = PY_LANGUAGE
         tree = parser.parse(source)
+        # Traverse Tree-sitter tree for symbols
+        def traverse(node):
+            if node.type in ('function_definition', 'class_definition'):
+                s = node.start_point[0] + 1
+                e = node.end_point[0] + 1
+                symbol_ranges.append((s, e))
+            for child in node.children:
+                traverse(child)
+        traverse(tree.root_node)
     except Exception:
-        # Parsing failed; fallback entirely
-        return extract_context(file_path, hunks, context_lines)
-
-    # Collect symbol ranges: function_definition, class_definition
-    symbol_ranges: list[tuple[int, int]] = []
-    def traverse(node):
-        if node.type in ('function_definition', 'class_definition'):
-            start, end = node.start_point[0] + 1, node.end_point[0] + 1
-            symbol_ranges.append((start, end))
-        for child in node.children:
-            traverse(child)
-    traverse(tree.root_node)
+        symbol_ranges = []
+    # Fallback to AST if no symbols found
+    if not symbol_ranges:
+        try:
+            tree = ast.parse(''.join(lines))
+            for node in ast.walk(tree):
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                    s = getattr(node, 'lineno', None)
+                    e = getattr(node, 'end_lineno', None)
+                    if s is None:
+                        continue
+                    if e is None:
+                        e = s
+                        for child in ast.walk(node):
+                            if hasattr(child, 'lineno'):
+                                e = max(e, child.lineno)
+                    symbol_ranges.append((s, e))
+        except SyntaxError:
+            # Fallback entirely to raw diff context
+            return extract_context(file_path, hunks, context_lines)
 
     contexts: list[dict] = []
     for hunk_start, hunk_end in hunks:
