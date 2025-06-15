@@ -6,26 +6,26 @@
 
 ## Installation
 
-### Clone & bootstrap (recommended)
+### End-user install (recommended)
 
+Install the latest released version from PyPI:
 ```bash
-git clone https://github.com/naoko/codereviewprompt.git
-cd codereviewprompt
-make requirements
-make init
+pip install codereviewprompt
 ```
 
-### Install via `uv` (alternate)
-
+Alternatively, install directly from GitHub via `uv`:
 ```bash
 uv pip install git+https://github.com/naoko/codereviewprompt.git
 ```
 
-### Manual install (fallback)
+### Developer setup
 
+For working on the codebase (requires Git, Make, and `uv`):
 ```bash
-python -m venv .venv && source .venv/bin/activate
-pip install -e .
+git clone https://github.com/naoko/codereviewprompt.git
+cd codereviewprompt
+make requirements     # update requirements.txt
+make init             # create .venv and install dependencies
 ```
 
 ---
