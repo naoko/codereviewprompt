@@ -13,14 +13,14 @@ If you don’t have `uv` installed, install it with the official installer:
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-Install or update codereviewprompt via `uv`:
+Install or update codereviewprompt from GitHub via `uv` (no virtualenv required):
 ```bash
-uv pip install codereviewprompt          # first-time install
-uv pip install --upgrade codereviewprompt  # update to latest version
+uv pip install git+https://github.com/naoko/codereviewprompt.git          # first-time install
+uv pip install --upgrade git+https://github.com/naoko/codereviewprompt.git  # update to latest version
 ```
 
-(*Optional*: without `uv`, you can use pip directly: `pip install codereviewprompt` and
-`pip install --upgrade codereviewprompt`.)
+(*Optional*: you can also install from PyPI with `pip install codereviewprompt`, but
+we recommend using `uv` to avoid installing globally.)
 
 ### Developer setup
 
