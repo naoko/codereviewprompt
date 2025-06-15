@@ -147,8 +147,7 @@ def list_langs():  # pragma: no cover
     if not os.path.exists(so_path):
         click.echo(
             f"Language library not found at {so_path}."
-            " Please install the 'tree-sitter-languages' package or run"
-            " `codereviewprompt build-langs <languages...>`"
+            " Please run `codereviewprompt build-langs <languages...>`"
         )
         sys.exit(1)
     try:

@@ -11,9 +11,9 @@ def test_missing_build_library(monkeypatch, capsys):
     # Remove build_library if present
     monkeypatch.delattr(tree_sitter.Language, 'build_library', raising=False)
     # Call main with minimal args
+    # Simulate missing build_library => exit with error
     with pytest.raises(SystemExit) as exc:
         build_langs.main(['python'])
-    # Should exit with code 1 and print an error about missing build_library
     assert exc.value.code == 1
     captured = capsys.readouterr()
     assert 'does not support building language libraries' in captured.out

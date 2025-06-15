@@ -115,52 +115,6 @@ Any CLI flag overrides the config file at run‑time.
 
 ---
 
-## 🌳 Building Tree‑sitter Languages
-
-codereviewprompt needs a compiled shared library containing the grammars you care about:
-
-```bash
-# One‑time build (C compiler required)
-python -m codereviewprompt.build_langs c python javascript typescript go
-```
-
-This produces `~/.cache/codereviewprompt/langs.so` which the CLI will reuse.
-
-### Pre-built grammars
-
-codereviewprompt now includes the `tree-sitter-languages` package as a dependency, so prebuilt grammars are installed automatically. After installation, the shared library will be placed in:
-```
-~/.cache/codereviewprompt/langs.so
-```
-You can inspect available grammars with:
-```bash
-codereviewprompt list-langs
-```
-
-### Listing installed languages
-
-Once you have a compiled `langs.so`, you can list the embedded grammars by inspecting its exported symbols. For example:
-```bash
-# List all Tree-sitter language symbols in the shared library
-nm ~/.cache/codereviewprompt/langs.so 2>/dev/null \
-  | grep ts_language_ \
-  | sed 's/.*ts_language_//'
-```
-This will print names like `python`, `javascript`, `go`, etc., corresponding to the languages you built into the library.
-
-Alternatively, use the built-in CLI command:
-```bash
-codereviewprompt list-langs
-```
-This will inspect the shared library (by default at `~/.cache/codereviewprompt/langs.so`) and list embedded languages.
-You can override the library path with the `CODEREVIEWPROMPT_LANGS_SO` environment variable, e.g.:
-```bash
-export CODEREVIEWPROMPT_LANGS_SO=/path/to/your/langs.so
-codereviewprompt list-langs
-```
-
----
-
 ## 🧪 Development & Tests
 
 ```bash

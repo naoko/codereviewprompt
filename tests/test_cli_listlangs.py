@@ -23,12 +23,9 @@ def test_list_langs_no_library(tmp_path):
     runner = CliRunner()
     # Should fallback to bundled pre-built grammars and list languages
     result = runner.invoke(cli, ['list-langs'])
-    # Without a user cache, list-langs should either list languages (via wheel) or report none
+    # With no user cache but installed wheel, list-langs falls back and reports no languages
     assert result.exit_code == 0
-    assert (
-        'Installed Tree-sitter languages:' in result.output
-        or 'No languages detected in library.' in result.output
-    )
+    assert 'No languages detected in library.' in result.output
 
 def test_list_langs_with_cache(monkeypatch, tmp_path):
     # Create dummy langs.so

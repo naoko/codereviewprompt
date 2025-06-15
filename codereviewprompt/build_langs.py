@@ -37,8 +37,8 @@ def main(args=None):
     # Verify that the Language.build_library API is available
     if not hasattr(Language, 'build_library'):
         print(
-            "Error: your installed tree_sitter binding does not support building language libraries."
-            " Please install py-tree-sitter>=0.20, or use the tree-sitter-languages wheel for prebuilt grammars."
+            "Error: your installed tree-sitter binding does not support building language libraries."
+            " Please install 'tree-sitter>=0.20' in your active Python environment and rerun."
         )
         sys.exit(1)
     # Prepare temporary directory for cloning grammar repos
