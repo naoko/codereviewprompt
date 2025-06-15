@@ -2,5 +2,5 @@ click>=8.0
 PyYAML
 requests
 pyperclip
-tree-sitter>=0.20
-tree-sitter-languages>=1.10.2
+tree-sitter
+tree-sitter-python

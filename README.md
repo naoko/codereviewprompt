@@ -14,14 +14,6 @@ cd codereviewprompt
 make requirements
 make init
 ```
-You can then list or build grammars:
-```bash
-# Inspect existing shared library
-codereviewprompt list-langs
-
-# Build grammars for languages
-codereviewprompt build-langs python javascript go
-```
 
 ### Install via `uv` (alternate)
 

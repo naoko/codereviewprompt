@@ -1,6 +1,7 @@
 import sys
 from click.testing import CliRunner
 import pytest
+pytest.skip("build-langs command removed", allow_module_level=True)
 
 from codereviewprompt.cli import cli
 
