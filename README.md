@@ -21,6 +21,10 @@ uv pip install git+https://github.com/naoko/codereviewprompt.git
 ### Developer setup
 
 For working on the codebase (requires Git, Make, and `uv`):
+If you don’t have `uv` installed, install it with the official installer:
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
 ```bash
 git clone https://github.com/naoko/codereviewprompt.git
 cd codereviewprompt
