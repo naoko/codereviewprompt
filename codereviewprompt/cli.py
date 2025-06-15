@@ -11,7 +11,7 @@ def cli():
 @click.option('--base', default='main', show_default=True,
               help='Commit/branch/tag to diff against')
 @click.option('--ticket', default=None,
-              help='Ticket ID to fetch via REST')
+              help='Ticket ID to include in prompt (description fetch coming soon)')
 @click.option('--context-lines', default=50, show_default=True, type=int,
               help='Lines of context around each touched symbol')
 @click.option('--out', default='clipboard', show_default=True,

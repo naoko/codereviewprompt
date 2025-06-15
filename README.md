@@ -3,6 +3,24 @@
 > A zero‑hook CLI that turns your local `git diff` (plus optional Story/Jira text) into a Gemini‑ready code‑review prompt.
 
 ---
+## What problem does this solve?
+
+Manually assembling code review prompts—collecting diffs, extracting relevant context, and including ticket details—is time-consuming and error-prone. codereviewprompt automates this in one simple command.
+
+## Who is this for?
+
+- Developers performing code reviews or using AI assistants to critique code.
+- Teams seeking consistency, speed, and reduced context-switching during reviews.
+
+## Benefits of using codereviewprompt
+
+- One-line CLI to generate a structured prompt with diff and contextual snippets.
+- Context-aware extraction around changed symbols.
+- Optional ticket ID inclusion (with story fetch integration planned).
+- Token-budget smart: trims context to fit model limits.
+- Fully local execution for code privacy.
+
+---
 
 ## Installation
 
