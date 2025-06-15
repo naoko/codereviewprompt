@@ -8,23 +8,23 @@
 
 ### End-user install (recommended)
 
-Install the latest released version from PyPI:
-```bash
-pip install codereviewprompt
-```
-
-Alternatively, install directly from GitHub via `uv`:
-```bash
-uv pip install git+https://github.com/naoko/codereviewprompt.git
-```
-
-### Developer setup
-
-For working on the codebase (requires Git, Make, and `uv`):
 If you don’t have `uv` installed, install it with the official installer:
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
+
+Install or update codereviewprompt via `uv`:
+```bash
+uv pip install codereviewprompt          # first-time install
+uv pip install --upgrade codereviewprompt  # update to latest version
+```
+
+(*Optional*: without `uv`, you can use pip directly: `pip install codereviewprompt` and
+`pip install --upgrade codereviewprompt`.)
+
+### Developer setup
+
+For working on the codebase (requires Git, Make, and `uv`):
 ```bash
 git clone https://github.com/naoko/codereviewprompt.git
 cd codereviewprompt
