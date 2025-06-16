@@ -1,12 +1,7 @@
 UV ?= uv
 
-.PHONY: requirements init
+.PHONY: init
 
-requirements:
+init:
 	@$(UV) venv .venv
-	@$(UV) pip install pip-tools
-	@$(UV) run pip-compile requirements.in
-
-init: requirements
-	@$(UV) pip install -r requirements.txt
-	@$(UV) pip install -r requirements-dev.txt
+	@$(UV) pip install .[dev]

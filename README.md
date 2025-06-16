@@ -46,7 +46,6 @@ For working on the codebase (requires Git, Make, and `uv`):
 ```bash
 git clone https://github.com/naoko/codereviewprompt.git
 cd codereviewprompt
-make requirements     # update requirements.txt
 make init             # create .venv and install dependencies
 ```
 
@@ -68,7 +67,7 @@ make init             # create .venv and install dependencies
 * Git installed and on `PATH`
 * (Optional) access to Jira/Linear REST API & auth token
 
-Python dependencies are pinned in `pyproject.toml` / `requirements.txt` and installed automatically.
+Python dependencies are pinned in `pyproject.toml` and installed automatically.
 
 ---
 
@@ -132,7 +131,7 @@ Any CLI flag overrides the config file at run‑time.
 ## 🧪 Development & Tests
 
 ```bash
-pip install -r requirements-dev.txt
+uv pip install '.[dev]'
 pytest -q
 ```
 
@@ -140,12 +139,10 @@ pytest -q
 
 Use the provided Makefile for common tasks:
 
-* make requirements — compile `requirements.in` to `requirements.txt` (requires pip-tools).
 * make init         — create a `.venv` via `uv` and install both production and dev dependencies.
 
 Example:
 ```bash
-make requirements
 make init
 ```
 

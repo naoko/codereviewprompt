@@ -28,3 +28,9 @@ classifiers = [
 
 [project.scripts]
 codereviewprompt = "codereviewprompt.cli:cli"
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.0",
+  "marimo"
+]

@@ -1,7 +1,0 @@
-click>=8.0
-PyYAML
-requests
-pyperclip
-tree-sitter
-tree-sitter-python
-tree-sitter-languages>=1.10.2
