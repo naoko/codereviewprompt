@@ -19,7 +19,7 @@ dependencies = [
   "pyperclip",
   "tree-sitter>=0.20",
   "tree-sitter-python",
-  "tree-sitter-languages>=1.10.2"
+  "tree-sitter-language-pack"
 ]
 classifiers = [
   "Programming Language :: Python :: 3.11",
